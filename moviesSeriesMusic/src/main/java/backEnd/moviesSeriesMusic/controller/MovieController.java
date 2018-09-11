@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author rpalomino
  */
@@ -25,11 +27,14 @@ public class MovieController {
             method = RequestMethod.POST
     )
     public Movie saveMovie (@RequestBody Movie movie){
-
-
         return movieService.saveMovie(movie);
+    }
 
-
+    @RequestMapping(
+            method = RequestMethod.GET
+    )
+    public List<Movie> getAllMovies (){
+        return movieService.listAllMovies();
     }
 
 

@@ -20,13 +20,17 @@ public class MovieService {
 
     public List<Movie> listAllMovies (){
 
-        List<Movie> listMovies = movieRepository.findAll();
-        return listMovies;
+        return movieRepository.findAll();
     }
 
     public Movie saveMovie (Movie movie){
 
         return movieRepository.save(movie);
+    }
+
+    public void deleteMovie (Movie movie){
+
+        movieRepository.delete(movie);
     }
 
 
