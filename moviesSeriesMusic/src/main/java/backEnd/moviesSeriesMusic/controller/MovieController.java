@@ -4,10 +4,7 @@ import backEnd.moviesSeriesMusic.domain.Movie;
 import backEnd.moviesSeriesMusic.service.MovieService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +13,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/movies")
-@Api(value="onlinestore", description="Operations pertaining to products in Online Store")
 public class MovieController {
 
     @Autowired
@@ -35,6 +31,30 @@ public class MovieController {
     )
     public List<Movie> getAllMovies (){
         return movieService.listAllMovies();
+    }
+
+    @RequestMapping(
+      value = "/{id}",
+      method = RequestMethod.GET
+    )
+    public Movie getMovieById (@PathVariable String id){
+      return movieService.findById(id);
+    }
+
+    @RequestMapping(
+      value = "/{id}",
+      method = RequestMethod.PUT
+    )
+    public void deleteMovieById (@PathVariable String id){
+      movieService.deleteMovie(id);
+    }
+
+    @RequestMapping(
+      value = "/{id}",
+      method = RequestMethod.POST
+    )
+    public Movie updateMovie (@RequestBody Movie movie, @PathVariable String id){
+      return movieService.updateMovie(id, movie);
     }
 
 

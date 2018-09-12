@@ -28,9 +28,28 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
-    public void deleteMovie (Movie movie){
+    public Movie findById (String id){
 
-        movieRepository.delete(movie);
+      return movieRepository.findMovieById(id);
+    }
+
+    public void deleteMovie (String id){
+
+      Movie movieDelete = movieRepository.findMovieById(id);
+
+        movieRepository.delete(movieDelete);
+    }
+
+    public Movie updateMovie (String id, Movie movie){
+
+      Movie movieUpdate = movieRepository.findMovieById(id);
+      movieUpdate.setName(movie.getName());
+      movieUpdate.setGender(movie.getGender());
+      movieUpdate.setYear(movie.getYear());
+      movieUpdate.setCoverPage(movie.getCoverPage());
+      movieUpdate.setSecondCover(movie.getSecondCover());
+
+      return movieRepository.save(movieUpdate);
     }
 
 
