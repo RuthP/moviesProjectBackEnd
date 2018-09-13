@@ -3,10 +3,10 @@ package backEnd.moviesSeriesMusic.service;
 import backEnd.moviesSeriesMusic.domain.Movie;
 import backEnd.moviesSeriesMusic.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author rpalomino
@@ -19,30 +19,36 @@ public class MovieService {
 
 
     public List<Movie> listAllMovies (){
-
         return movieRepository.findAll();
     }
 
     public Movie saveMovie (Movie movie){
-
         return movieRepository.save(movie);
     }
 
-    public Movie findById (String id){
+    public Movie findMovieById (String id){
 
-      return movieRepository.findMovieById(id);
+      Optional<Movie> movie = movieRepository.findById(id);
+
+      if(movie.isPresent()){
+       return movie.get();
+      }else {
+        return new Movie();
+      }
+
     }
 
     public void deleteMovie (String id){
 
-      Movie movieDelete = movieRepository.findMovieById(id);
+      Movie movieDelete = findMovieById(id);
 
-        movieRepository.delete(movieDelete);
+      movieRepository.delete(movieDelete);
+
     }
 
     public Movie updateMovie (String id, Movie movie){
 
-      Movie movieUpdate = movieRepository.findMovieById(id);
+      Movie movieUpdate = findMovieById(id);
       movieUpdate.setName(movie.getName());
       movieUpdate.setGender(movie.getGender());
       movieUpdate.setYear(movie.getYear());
@@ -50,6 +56,7 @@ public class MovieService {
       movieUpdate.setSecondCover(movie.getSecondCover());
 
       return movieRepository.save(movieUpdate);
+
     }
 
 

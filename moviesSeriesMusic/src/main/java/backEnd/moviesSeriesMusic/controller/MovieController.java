@@ -38,7 +38,15 @@ public class MovieController {
       method = RequestMethod.GET
     )
     public Movie getMovieById (@PathVariable String id){
-      return movieService.findById(id);
+      return movieService.findMovieById(id);
+    }
+
+    @RequestMapping(
+      value = "/{id}",
+      method = RequestMethod.POST
+    )
+    public Movie updateMovie (@PathVariable String id, @RequestBody Movie movie){
+      return movieService.updateMovie(id, movie);
     }
 
     @RequestMapping(
@@ -48,15 +56,5 @@ public class MovieController {
     public void deleteMovieById (@PathVariable String id){
       movieService.deleteMovie(id);
     }
-
-    @RequestMapping(
-      value = "/{id}",
-      method = RequestMethod.POST
-    )
-    public Movie updateMovie (@RequestBody Movie movie, @PathVariable String id){
-      return movieService.updateMovie(id, movie);
-    }
-
-
 
 }
