@@ -15,7 +15,7 @@ import java.util.List;
 public class SeriesController {
 
     @Autowired
-    SeriesService seriesService;
+    private SeriesService seriesService;
 
     @RequestMapping(
       method = RequestMethod.POST
@@ -32,7 +32,7 @@ public class SeriesController {
     }
 
     @RequestMapping(
-      value = "/id",
+      value = "/{id}",
       method = RequestMethod.GET
     )
     public Series getSeriesById (@PathVariable String id){
@@ -40,7 +40,7 @@ public class SeriesController {
     }
 
     @RequestMapping(
-      value = "/id",
+      value = "/{id}",
       method = RequestMethod.POST
     )
     public Series updateSeries (@PathVariable String id,@RequestBody Series series){

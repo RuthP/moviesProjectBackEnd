@@ -15,7 +15,7 @@ import java.util.Optional;
 public class SeriesService {
 
     @Autowired
-    SeriesRepository seriesRepository;
+    private SeriesRepository seriesRepository;
 
     public List<Series> listAllSeries () {
       return seriesRepository.findAll();
